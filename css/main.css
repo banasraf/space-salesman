@@ -1,0 +1,129 @@
+html, body {
+    background-color: #181818;
+    font-family: 'Roboto Mono', monospace;
+    height: 100%;
+}
+
+header {
+    background-color: #181818;
+    width: 100%;
+    border-bottom: 1px solid #c397b1;
+}
+
+header img {
+    max-width: 90%;
+    height: auto;
+    display: block;
+    margin: 30px auto 30px;
+}
+
+@media screen and (max-width: 886px) {
+    article#hall_of_fame {
+        font-size: 18pt;
+    }
+}
+
+@media screen and (min-width: 887px) {
+    article#hall_of_fame {
+        font-size: 23pt;
+    }
+}
+
+article#hall_of_fame {
+    color: #ffd7f2;
+    margin: auto;
+    max-width: 887px;
+    width: 100%;
+    text-align: center;
+}
+
+article#hall_of_fame h1 {
+    margin-bottom: 1pt;
+}
+
+article#hall_of_fame th {
+    border-bottom: 1px solid #c397b1;
+}
+
+article#hall_of_fame table {
+    width: 80%;
+    border-bottom: 1px solid #c397b1;
+    border-top: 1px solid #c397b1;
+    margin: auto auto 160px;
+}
+
+article#hall_of_fame td {
+    text-align: center;
+}
+
+nav {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background-color: #181818;
+    border-top: 1px solid #c397b1;
+    padding-top: 30px;
+    padding-bottom: 30px;
+}
+
+nav a :visited :link {
+    border: none;
+}
+
+nav img#play_img {
+    display: block;
+    margin: auto;
+}
+
+nav img#play_img:hover {
+    cursor: pointer;
+}
+
+div#name_choose_popup {
+    background-color: #434343;
+    border: #c397b1 1px solid;
+    color: #ffd7f2;
+    max-width: 800px;
+    width: 90%;
+}
+
+div#name_choose_popup header {
+    background-color: #434343;
+    border-bottom: #c397b1 1px solid;
+    text-align: center;
+}
+
+div#name_choose_popup header h2 {
+    /*margin-left: 20px;*/
+    font-size: 20pt;
+}
+
+div#name_choose_popup input[type=text] {
+    background-color: #181818;
+    font-size: 25pt;
+    color: white;
+    font-family: 'Roboto Mono', monospace;
+    font-weight: bold;
+    padding: 5px;
+    width: 90%;
+    display: block;
+    text-align: center;
+    margin: 10px auto auto;
+}
+
+div#name_choose_popup input[type=image] {
+    display: block;
+    margin: auto auto 5px;
+}
+
+div#popup_layer {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    background-color: #18181899;
+    margin-top: -50px;
+    z-index: 1;
+}
