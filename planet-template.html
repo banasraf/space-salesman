@@ -15,19 +15,22 @@
             <h2>Items</h2>
             <table>
                 <tr> <th>Item</th> <th>Available</th> <th>Buy price</th> <th>Sell price</th></tr>
-                <tr> <td>Cynamon</td> <td>59</td> <td>6</td> <td>5</td></tr>
-                <tr> <td>Dwimeryt</td> <td>56</td> <td>10</td> <td>10</td></tr>
-                <tr> <td>Lyrium</td> <td>51</td> <td>9</td> <td>8</td></tr>
-                <tr> <td>Murkwie</td> <td>6</td> <td>88</td> <td>76</td></tr>
-                <tr> <td>Nuka-Cola</td> <td>35</td> <td>17</td> <td>16</td></tr>
+                {% for item in model['planets']['Corellia']['available_items'] %}
+                <tr>
+                    <td>{{item}}</td>
+                    <td>{{model['planets']['Corellia']['available_items'][item]['available']}}</td>
+                    <td>{{model['planets']['Corellia']['available_items'][item]['buy_price']}}</td>
+                    <td>{{model['planets']['Corellia']['available_items'][item]['sell_price']}}</td>
+                </tr>
+                {% endfor %}
             </table>
         </div>
         <div class="planet_spaceships">
             <h2>Spaceships</h2>
             <ul>
-                <li><a href="spaceship.html">Hermes</a></li>
-                <li><a href="spaceship.html">Enterprise</a></li>
-                <li><a href="spaceship.html">Millenium Falcon</a></li>
+                {% for s in list_starships('Corellia', model) %}
+                <li><a href="spaceship.html">{{s}}</a></li>
+                {% endfor %}
             </ul>
         </div>
     </div>

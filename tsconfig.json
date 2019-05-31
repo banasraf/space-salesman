@@ -3,7 +3,7 @@
     "module": "commonjs",
     "target": "es6",
     "sourceMap": true,
-    "outFile": "script/main.js"
+    "outDir": "script"
   },
   "exclude": [
     "node_modules"

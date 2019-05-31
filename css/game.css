@@ -146,77 +146,85 @@ div#popup_layer {
     z-index: 100;
 }
 
-div#planet_info {
+div.planet_info {
     background-color: #434343;
     max-width: 800px;
     width: 90%;
     border: 1px solid #c397b1;
+    max-height: 65%;
+    overflow-y: scroll;
 }
 
-div#planet_info header {
+div.planet_info header {
     border-bottom: 1px solid #c397b1;
     text-align: center;
 }
 
-div#planet_info div#planet_items {
+div.planet_info div.planet_items {
     padding-left: 20px;
     border-bottom: 1px solid #c397b1;
 }
 
-div#planet_info td, th {
+div.planet_info td, th {
     padding: 10px;
     text-align: left;
 }
 
-div#planet_info div#planet_spaceships {
+div.planet_info div.planet_spaceships {
     padding-left: 20px;
 
 }
 
-div#planet_info div#planet_spaceships a {
+div.planet_info div.planet_spaceships a {
     text-decoration: none;
     color: #ffd7f2;
 }
 
-div#spaceship_info {
+div.spaceship_info {
     background-color: #434343;
     max-width: 800px;
     width: 90%;
     border: 1px solid #c397b1;
+    max-height: 65%;
+    overflow-y: scroll;
 }
 
-div#spaceship_info header {
+div.spaceship_info header {
     border-bottom: 1px solid #c397b1;
     text-align: center;
 }
 
-div#spaceship_info div#cargo_info {
+div.spaceship_info div.cargo_info {
     border-bottom: 1px solid #c397b1;
     padding-left: 20px;
 }
 
-div#spaceship_info td, th {
+div.spaceship_info td, th {
     padding: 10px;
     text-align: left;
 }
 
-div#buy_menu {
+div.buy_menu {
     padding-left: 20px;
     border-bottom: 1px solid #c397b1;
 }
 
-div#travel_info {
+div.travel_info {
     padding-left: 20px;
 }
 
-form#travel_form {
+form.travel_form {
     padding-bottom: 20px;
 }
 
-form#travel_form button {
+form.travel_form button {
     font-weight: bold;
     background-color: #c397b1;
     color: white;
     border: #181818 1px solid;
     padding: 5px;
+}
+
+.clickable {
+    cursor: pointer;
 }

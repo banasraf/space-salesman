@@ -5,12 +5,7 @@
     <title>Space Salesman</title>
     <link rel="stylesheet" href="css/main.css">
     <link href="https://fonts.googleapis.com/css?family=Roboto+Mono" rel="stylesheet">
-    <script>
-        function show_popup() {
-            let popup_layer = document.getElementById('popup_layer');
-            popup_layer.style.display = 'flex'
-        }
-    </script>
+    <script src="script/start.bundle.js"></script>
 </head>
 <body>
 <div id="popup_layer">
@@ -18,7 +13,7 @@
         <header>
             <h2>Choose your nickname</h2>
         </header>
-        <form action="game.html">
+        <form id="nick_form">
             <input type="text" name="nick"/> <br/>
             <input type="image" src="img/start.png" name="start" alt="START">
         </form>
@@ -29,44 +24,14 @@
 </header>
 <article id="hall_of_fame">
     <h1>Hall of fame</h1>
-    <table>
+    <table id="hall_of_fame_table">
         <tr>
             <th>Rank</th> <th>Player</th> <th>Credits</th>
-        </tr>
-        <tr>
-            <td>1.</td> <td>captain-a</td> <td>99</td>
-        </tr>
-        <tr>
-            <td>2.</td> <td>captain-b</td> <td>89</td>
-        </tr>
-        <tr>
-            <td>3.</td> <td>captain-c</td> <td>79</td>
-        </tr>
-        <tr>
-            <td>4.</td> <td>captain-d</td> <td>69</td>
-        </tr>
-        <tr>
-            <td>5.</td> <td>captain-e</td> <td>59</td>
-        </tr>
-        <tr>
-            <td>6.</td> <td>captain-f</td> <td>49</td>
-        </tr>
-        <tr>
-            <td>7.</td> <td>captain-g</td> <td>39</td>
-        </tr>
-        <tr>
-            <td>8.</td> <td>captain-h</td> <td>29</td>
-        </tr>
-        <tr>
-            <td>9.</td> <td>captain-i</td> <td>19</td>
-        </tr>
-        <tr>
-            <td>10.</td> <td>captain-j</td> <td>9</td>
         </tr>
     </table>
 </article>
 <nav>
-    <img onclick="show_popup()" id="play_img" src="img/play.png" alt="Play"/>
+    <img id="play_img" src="img/play.png" alt="Play"/>
 </nav>
 </body>
 </html>

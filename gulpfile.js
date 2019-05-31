@@ -24,15 +24,30 @@ gulp.task("default",
         gulp.parallel('copy-image'),
         gulp.parallel('copy-css'),
         function () {
-    return browserify({
-        basedir: '.',
-        debug: true,
-        entries: ['typescript/main.ts'],
-        cache: {},
-        packageCache: {}
-    })
-        .plugin(tsify)
-        .bundle()
-        .pipe(source('bundle.js'))
-        .pipe(gulp.dest("dist/script"));
-}));
+        return browserify({
+            basedir: '.',
+            debug: true,
+            entries: ['typescript/main.ts'],
+            cache: {},
+            packageCache: {}
+            })
+            .plugin(tsify)
+            .bundle()
+            .pipe(source('bundle.js'))
+            .pipe(gulp.dest("dist/script"));
+        },
+        function () {
+            return browserify({
+                basedir: '.',
+                debug: true,
+                entries: ['typescript/startscreen.ts'],
+                cache: {},
+                packageCache: {}
+            })
+                .plugin(tsify)
+                .bundle()
+                .pipe(source('start.bundle.js'))
+                .pipe(gulp.dest("dist/script"));
+        }
+
+));

@@ -1,0 +1,1 @@
+export interface SMap<V> { [key: string]: V; }

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Space Salesman</title>
+    <link rel="stylesheet" href="css/game.css"/>
+</head>
+<body>
+<header id="main_bar">
+    <img src="img/title.png" alt="Space Salesman" id="logo">
+    <div id="time_info">
+        Time left: <span>{{ model['game_duration'] }}</span>
+    </div>
+    <div id="player_info">
+        <span id="nickname">Captain-a</span>
+        <br/>
+        <span id="result">Credits: {{model['initial_credits']}}</span>
+    </div>
+</header>
+<main>
+    <div class="items_container" id="planets">
+        <h1>Planets</h1>
+        <div class="flex_container">
+            {% for p in model['planets'] %}
+            <a href="planet.html"><div class="planet_item">
+                <h1>{{p}}</h1>
+                <div>
+                    {{model['planets'][p]['x']}}, {{model['planets'][p]['y']}}
+                </div>
+            </div></a>
+            {% endfor %}
+        </div>
+    </div>
+    <div class="items_container" id="spaceships">
+        <h1>Spaceships</h1>
+        <div class="flex_container">
+            {% for s in model['starships'] %}
+            <a href="spaceship.html"><div class="spaceship_item">
+                <h1>{{ s }}</h1>
+                <div>
+                    {{ model['starships'][s]['position'] }}
+                </div>
+            </div></a>
+            {% endfor %}
+        </div>
+    </div>
+</main>
+</body>
+</html>

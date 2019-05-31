@@ -1,3 +1,5 @@
+import {SMap} from "./smap";
+import {Spaceport, Trade} from "./controller";
 
 export interface ItemStockInfo {
     available: number;
@@ -24,23 +26,6 @@ export interface InitData {
     starships: { [s: string]: StarshipInfo; };
 }
 
-// let data: InitData = JSON.parse(data_string);
-
-// console.log(data.game_duration, data.initial_credits);
-// for (let item of data.items) {
-//     console.log(item)
-// }
-//
-// for (let planet in data.planets) {
-//     console.log(planet);
-//     let info: PlanetInfo = data.planets[planet];
-//     for (let item in info.available_items) {
-//         let item_info: ItemStockInfo = info.available_items[item];
-//         console.log(`\t ${item}`);
-//         console.log(`\t\t ${item_info.available} ${item_info.buy_price} ${item_info.sell_price}`);
-//     }
-// }
-
 export class ItemStock {
     available: number;
     readonly buy_price: number;
@@ -56,13 +41,13 @@ export class ItemStock {
 export class Planet {
     readonly x: number;
     readonly y: number;
-    stock: Map<string, ItemStock>;
+    stock: SMap<ItemStock>;
 
     constructor(info: PlanetInfo) {
         this.x = info.x;
         this.y = info.y;
         let items = info.available_items;
-        this.stock = new Map<string, ItemStock>();
+        this.stock = {};
         for (let item in items) {
            this.stock[item] = new ItemStock(items[item]);
         }
@@ -75,12 +60,12 @@ export class Travel {
 
 export class Starship {
     readonly cargo_hold_size: number;
-    cargo: Map<string, number>;
+    cargo: SMap<number>;
     position: string | Travel;
 
     constructor(info: StarshipInfo) {
         this.cargo_hold_size = info.cargo_hold_size;
-        this.cargo = new Map<string, number>();
+        this.cargo = {};
         this.position = info.position;
     }
 }
@@ -88,25 +73,86 @@ export class Starship {
 export class GameModel {
     credits: number;
     timer: number;
-    planets: Map<string, Planet>;
-    starships: Map<string, Starship>;
+    planets: SMap<Planet>;
+    starships: SMap<Starship>;
+
+    listStarshipsOnPlanet(planet: string): string[] {
+        let res: string[] = [];
+        for (let starship in this.starships) {
+            if (typeof this.starships[starship].position === 'string') {
+                if (this.starships[starship].position == planet) {
+                    res.push(starship);
+                }
+            }
+        }
+        return res;
+    }
+
+    getTrade(starship: string, planet: string): Trade {
+        return new Trade(this.planets[planet].stock, this.starships[starship].cargo,
+            this.starships[starship].cargo_hold_size);
+    }
+
+    getSpaceport(starship: string): Spaceport {
+        return new Spaceport(this.starships[starship], this.planets);
+    }
 
     constructor(data: InitData) {
         this.credits = data.initial_credits;
         this.timer = data.game_duration;
-        this.planets = new Map<string, Planet>();
+        this.planets = {};
         let mp = data.planets;
         for (let planet in mp) {
             this.planets[planet] = new Planet(mp[planet]);
         }
-        this.starships = new Map<string, Starship>();
+        this.starships = {};
         let ms = data.starships;
         for (let starship in ms) {
             this.starships[starship] = new Starship(ms[starship]);
         }
     }
 }
-//
-// let gm: GameModel = new GameModel(data);
-//
-// console.log(gm.planets['Ziemia']);
+
+export interface GameRanking {
+    rank: {name: string; credits: number}[]
+}
+
+
+export class GameStorage {
+
+    private mockRanking() {
+        localStorage.setItem(this.ranking_key, JSON.stringify({
+            rank: []
+        }));
+    }
+
+    public readRanking(): GameRanking | null {
+        return JSON.parse(localStorage.getItem(this.ranking_key));
+    }
+
+    public addEntryToRanking(name: string, credits: number) {
+        let r = this.readRanking() as GameRanking;
+        r.rank.sort(((a, b) => {return b.credits - a.credits}));
+        if (r.rank.length < 10) {
+            r.rank.push({name: name, credits: credits});
+        } else if (credits > r.rank[r.rank.length-1].credits) {
+            r.rank[r.rank.length-1] = {name: name, credits: credits};
+        }
+        r.rank.sort(((a, b) => {return b.credits - a.credits}));
+        localStorage.setItem(this.ranking_key, JSON.stringify(r));
+    }
+
+    public readName(): string | null {
+        return sessionStorage.getItem(this.name_key);
+    }
+
+    public setName(name: string) {
+        sessionStorage.setItem(this.name_key, name);
+    }
+
+    constructor(public ranking_key: string, public name_key: string) {
+        if (this.readRanking() === null) {
+            this.mockRanking();
+        }
+    }
+}

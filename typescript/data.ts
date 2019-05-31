@@ -710,7 +710,7 @@ export const data_string = "{\n" +
     "            \"cargo_hold_size\": 35,\n" +
     "            \"position\": \"Tatooine\"\n" +
     "        },\n" +
-    "        \"Niezwyci\u0119\u017cony\": {\n" +
+    "        \"Invincible\": {\n" +
     "            \"cargo_hold_size\": 60,\n" +
     "            \"position\": \"Argoland\"\n" +
     "        },\n" +

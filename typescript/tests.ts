@@ -1,6 +1,8 @@
-import {GameModel, InitData} from "./model";
+import {GameModel, InitData, ItemStock, Planet, Starship, Travel} from "./model";
 import { expect } from "chai";
 import "mocha";
+import {Spaceport, Trade} from "./controller";
+import {SMap} from "./smap";
 
 const json_string = "{\n" +
     "\n" +
@@ -71,12 +73,55 @@ const json_string = "{\n" +
     "}";
 
 describe("GameModel construction", () => {
-
     it("should load data from json", () => {
         let data: InitData = JSON.parse(json_string);
         let gm: GameModel = new GameModel(data);
         expect(gm.planets["Ziemia"].x).to.equal(0);
-
+        expect(gm.planets["Ziemia"].stock["Ziemniaki"].available).to.equal(15002900);
+        expect(gm.planets["Ziemia"].stock["Piasek"].sell_price).to.equal(32);
+        expect(<string>gm.starships["Rocinante"].position).to.equal("Ziemia");
+        expect(gm.timer).to.equal(1000);
     });
 
+});
+
+describe("Trade", () => {
+    let stock: SMap<ItemStock>  = {};
+    stock["x"] = new ItemStock({available: 4, sell_price: 10, buy_price: 5});
+    stock["y"] = new ItemStock({available: 3, sell_price: 5, buy_price: 10});
+    let cargo: SMap<number> = {};
+    cargo["x"] = 4;
+    let trade: Trade = new Trade(stock, cargo, 4);
+    it('should allow to sell', function () {
+        expect(trade.sell("x", 50)).to.equal(60);
+        expect(stock["x"].available).to.equal(5);
+        expect(cargo["x"]).to.equal(3);
+    });
+    it("should allow to buy", () => {
+        expect(trade.buy("y", 60)).to.equal(50);
+        expect(stock["y"].available).to.equal(2);
+        expect(cargo["y"]).to.equal(1);
+    });
+    it('should not allow to overfill cargo', function () {
+        expect(trade.canBuy("x", 50)).to.false;
+    });
+    it('should not allow to buy without enough credits', function () {
+        expect(trade.canBuy("x", 2)).to.false;
+    });
+});
+
+describe("Spaceport", () => {
+    let starship1: Starship = new Starship({position: "X", cargo_hold_size: 0});
+    let planetx: Planet = new Planet({x: 0, y: 10, available_items: {}});
+    let planety: Planet = new Planet({x: 10, y: 20, available_items: {}});
+    let planets = {"X": planetx, "Y": planety};
+    let sp: Spaceport = new Spaceport(starship1, planets);
+    it('should allow to travel', function () {
+        let time = sp.travel("Y");
+        expect(time).to.equal(15);
+        expect(<Travel>starship1.position).to.equal(new Travel("X", "Y", 15));
+    });
+    it('should not allow to move a starship in travel', function () {
+        expect(sp.canTravel("Y")).to.false;
+    });
 });
