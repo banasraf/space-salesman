@@ -13,6 +13,7 @@ export let db = new sqlite.Database(DBSOURCE, (err) => {
            if (err) {
                console.log(err);
            } else {
+               db.run('INSERT INTO user (name, password) VALUES ("me", "password")', (err) => {});
                db.run('INSERT INTO user (name, password) VALUES ("admin", "admin")', (err) => {});
            }
 
