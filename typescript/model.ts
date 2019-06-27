@@ -1,5 +1,6 @@
 import {SMap} from "./smap";
 import {Spaceport, Trade} from "./controller";
+import {data_string} from "./data";
 
 export interface ItemStockInfo {
     available: number;
@@ -98,6 +99,7 @@ export class GameModel {
     }
 
     constructor(data: InitData) {
+        console.log('loool ' + data.initial_credits);
         this.credits = data.initial_credits;
         this.timer = data.game_duration;
         this.planets = {};
@@ -143,14 +145,18 @@ export class GameStorage {
     }
 
     public readName(): string | null {
-        return sessionStorage.getItem(this.name_key);
+        return (new URLSearchParams(window.location.search)).get(this.name_key);
     }
 
-    public setName(name: string) {
-        sessionStorage.setItem(this.name_key, name);
+    public async loadScenario() {
+        let id = (new URLSearchParams(window.location.search)).get(this.scenario_id_key);
+        let response = await fetch(`/scenarios/${id}`);
+        if (response.status == 200) {
+            return JSON.parse(await response.text());
+        }
     }
 
-    constructor(public ranking_key: string, public name_key: string) {
+    constructor(public ranking_key: string, public name_key: string, public scenario_id_key) {
         if (this.readRanking() === null) {
             this.mockRanking();
         }

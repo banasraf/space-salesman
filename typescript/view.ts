@@ -2,6 +2,7 @@ import {GameModel, Planet, Starship, Travel} from "./model";
 import {SMap} from "./smap";
 import {PlanetBlockView, PlanetPopupView} from "./planet-view";
 import {StarshipBlockView, StarshipPopupView} from "./starship-view";
+import {MapView} from "./map-view";
 
 function log(a: string) {
     console.log(a);
@@ -24,6 +25,7 @@ export class GameView {
     planet_modals: SMap<PlanetPopupView>;
     starship_modals: SMap<StarshipPopupView>;
     current_modal: PlanetPopupView | StarshipPopupView;
+    map_view: MapView;
 
 
     private listPlanets(planets: SMap<Planet>) {
@@ -107,6 +109,8 @@ export class GameView {
     constructor(private model: GameModel, player_name: string, private controller: Controller) {
         this.showPlayerName(player_name);
         this.timer = document.getElementById("time_info").getElementsByTagName("span")[0];
+        this.map_view = new MapView(this.model, (p) => {this.showPlanetModal(p)},
+            (p) => {this.showStarshipModal(p)});
         this.updateTimer();
         this.credits = document.getElementById("result").getElementsByTagName("span")[0];
         this.updateCredits();
@@ -127,6 +131,7 @@ export class GameView {
 
     updateTimer() {
         this.timer.innerText = Math.ceil(this.model.timer).toString();
+        this.map_view.update();
     };
 
     updateCredits() {

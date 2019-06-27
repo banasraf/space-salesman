@@ -1,0 +1,53 @@
+html, body {
+    background-color: #181818;
+    font-family: 'Roboto Mono', monospace;
+    height: 100%;
+}
+
+input[type=text] {
+    background-color: #181818;
+    font-size: 25pt;
+    color: white;
+    font-family: 'Roboto Mono', monospace;
+    font-weight: bold;
+    padding: 5px;
+    width: 250px;
+    display: block;
+    text-align: center;
+    margin: 20px;
+}
+
+input[type=password] {
+    background-color: #181818;
+    font-size: 25pt;
+    color: white;
+    font-family: 'Roboto Mono', monospace;
+    font-weight: bold;
+    padding: 5px;
+    width: 250px;
+    display: block;
+    text-align: center;
+    margin: 20px;
+}
+
+input[type=submit] {
+    background-color: #181818;
+    font-size: 25pt;
+    color: white;
+    font-family: 'Roboto Mono', monospace;
+    font-weight: bold;
+    padding: 5px;
+    width: 250px;
+    display: block;
+    text-align: center;
+    margin: 20px;
+}
+
+div#container form {
+    display: flex;
+    flex-direction: row;
+    width: 50%;
+    margin-top: 300px;
+    margin-left: auto;
+    margin-right: auto;
+}

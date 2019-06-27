@@ -85,6 +85,7 @@ div#name_choose_popup {
     color: #ffd7f2;
     max-width: 800px;
     width: 90%;
+    text-align: center;
 }
 
 div#name_choose_popup header {
@@ -126,4 +127,42 @@ div#popup_layer {
     background-color: #18181899;
     margin-top: -50px;
     z-index: 1;
+}
+
+button {
+    display: block;
+    background-color: #181818;
+    border: #c397b1 1px solid;
+    color: white;
+    font-size: 18px;
+    margin-top: 20px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 5px;
+}
+
+div.scenario_form {
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    border-bottom: #c397b1 1px solid;
+    margin-bottom: 15px;
+}
+
+select {
+    display: block;
+    background-color: #181818;
+    border: #c397b1 1px solid;
+    color: white;
+    font-size: 18px;
+    padding: 5px;
+    width: 150px;
+    height: 50px;
+}
+
+div#scenario_details {
+    height: 200px;
+    width: 60%;
+    overflow-y: scroll;
 }

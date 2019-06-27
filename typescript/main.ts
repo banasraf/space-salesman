@@ -1,16 +1,17 @@
 import {data_string} from "./data";
 import {GameModel, GameStorage} from "./model";
-import {GameView} from "./view"
 import {GameController} from "./controller";
 
-let gm: GameModel = new GameModel(JSON.parse(data_string));
+// let gm: GameModel = new GameModel(JSON.parse(data_string));
 
 const TIME_MILLIS = 10;
 const TIME_INGAME = 0.01;
 
-window.onload = () => {
-    let storage = new GameStorage('ranking', 'name');
-    if (storage.readName() === null) window.location.replace('main.html');
+window.onload = async () => {
+    let storage = new GameStorage('ranking', 'nick', 'scenario_select');
+    let gm = new GameModel(await storage.loadScenario());
+    console.log(gm.credits);
+    if (storage.readName() === null || storage.readName().length == 0) window.location.replace('main.html');
     let gc = new GameController(gm, storage);
     let stepper = () => {
         if (gc.timeStep(TIME_INGAME)) {

@@ -1,0 +1,104 @@
+html, body {
+    background-color: #181818;
+    font-family: 'Roboto Mono', monospace;
+    height: 100%;
+    color: #ffd7f2;
+}
+
+
+div#container {
+    margin: auto;
+    width: 1000px;
+    text-align: center;
+}
+
+h1 {
+    font-size: 50px;
+    font-weight: bold;
+}
+
+h2 {
+    font-size: 30px;
+}
+
+div.block {
+    width: 100%;
+    border-bottom: #c397b1 1px solid;
+}
+
+form {
+    display: flex;
+    width: 100%;
+}
+
+form div#name-file {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+form div#descr {
+    margin-left: 30px;
+    width: 100%;
+}
+
+textarea[name="scenario_description"] {
+    display: block;
+    width: 600px;
+    height: 100px;
+    margin-left: auto;
+    margin-right: auto;
+    /*margin-top: 30px;*/
+    margin-bottom: 30px;
+    background-color: #181818;
+    border: #c397b1 1px solid;
+    color: white;
+    font-size: 18px;
+}
+
+input[name="scenario_name"] {
+    display: block;
+    background-color: #181818;
+    border: #c397b1 1px solid;
+    color: white;
+    font-size: 18px;
+}
+
+input[name="scenario_file"] {
+    display: block;
+    background-color: #181818;
+    border: #c397b1 1px solid;
+    color: white;
+    font-size: 18px;
+}
+
+input[type="submit"] {
+    background-color: #181818;
+    border: #c397b1 1px solid;
+    color: white;
+    font-size: 18px;
+}
+
+div#result {
+    height: 30px;
+}
+
+
+
+.row-flex {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.row-flex div {
+    margin: 10px;
+}
+
+button {
+    display: block;
+    background-color: #181818;
+    border: #c397b1 1px solid;
+    color: white;
+    font-size: 18px;
+}

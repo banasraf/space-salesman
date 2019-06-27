@@ -67,7 +67,17 @@ div#time_info {
 
 main {
     display: flex;
-    margin-top: 200px;
+    /*margin-top: 200px;*/
+}
+
+#map_dock {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+svg#map_svg {
+    border: #ffd7f2 1px solid;
 }
 
 @media screen and (max-width: 1000px) {

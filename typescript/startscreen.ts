@@ -1,10 +1,8 @@
 import {GameRanking, GameStorage} from "./model";
 
-
-
 function renderRankList() {
     let table = document.getElementById('hall_of_fame_table') as HTMLTableElement;
-    let storage = new GameStorage('ranking', 'name');
+    let storage = new GameStorage('ranking', 'nick', 'scenario_select');
     let ranking = <GameRanking>storage.readRanking();
     for (let i in ranking.rank) {
         let tr = document.createElement('tr');
@@ -26,15 +24,49 @@ function renderRankList() {
             popup_layer.style.display = 'none';
         }
     };
-    let nick_form: HTMLFormElement = document.getElementById('nick_form') as HTMLFormElement;
-    nick_form.onsubmit = () => {
-        storage.setName(nick_form.getElementsByTagName('input')[0].value);
-        window.location.replace('game.html');
-        return false;
+}
+
+function scenarioOption(id, name): HTMLOptionElement {
+    let option = document.createElement('option');
+    option.value = id.toString();
+    option.innerText = name;
+    return option;
+}
+
+function findScenario(scenarios, id) {
+    for (let scenario of scenarios) {
+        if (scenario.id == id) return scenario;
+    }
+}
+
+function fillDetails(select, scenarios) {
+    let div = document.getElementById('scenario_details');
+    let scenario = findScenario(scenarios, select.value);
+    div.innerHTML = `<h4>${scenario.name}</h4>Author: ${scenario.owner} <p>${scenario.descr}</p>`
+}
+
+function renderScenarioSelect(scenarios) {
+    let select = document.getElementById('scenario_select') as HTMLSelectElement;
+    for (let scenario  of scenarios) {
+        select.appendChild(scenarioOption(scenario.id, scenario.name));
+    }
+    fillDetails(select, scenarios);
+    select.onchange = () => {
+        fillDetails(select, scenarios);
     };
 }
 
-window.onload = () => {
-    renderRankList();
+async function loadAllScenarios() {
+    try {
+        let response = await fetch(`/scenarios`);
+        return response.json()
+    } catch (e) {
+        console.log(e)
+    }
+}
 
+window.onload = async () => {
+    renderRankList();
+    let scenarios = await loadAllScenarios();
+    renderScenarioSelect(scenarios);
 };

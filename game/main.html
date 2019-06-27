@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Space Salesman</title>
+    <link rel="stylesheet" href="/game/css/main.css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Mono" rel="stylesheet">
+    <script src="/game/script/start.bundle.js"></script>
+</head>
+<body>
+<div id="popup_layer">
+    <div id="name_choose_popup">
+        <header>
+            <h2>Choose your nickname</h2>
+        </header>
+        <form id="nick_form" action="/game/game.html">
+            <input type="text" name="nick"/> <br/>
+            <h2>Choose scenario</h2>
+            <div class="scenario_form">
+            <select name="scenario_select" id="scenario_select">
+            </select>
+                <div id="scenario_details">
+
+                </div>
+            </div>
+            <input type="image" src="/game/img/start.png" name="start" alt="START">
+        </form>
+    </div>
+</div>
+<header>
+    <img src="/game/img/title.png" alt="Space Salesman"/>
+</header>
+<article id="hall_of_fame">
+    <h1>Hall of fame</h1>
+    <table id="hall_of_fame_table">
+        <tr>
+            <th>Rank</th> <th>Player</th> <th>Credits</th>
+        </tr>
+    </table>
+</article>
+<nav>
+    <img id="play_img" src="/game/img/play.png" alt="Play"/>
+    <a href="/cockpit.html"><button>Go to user cockpit.</button></a>
+</nav>
+</body>
+</html>
